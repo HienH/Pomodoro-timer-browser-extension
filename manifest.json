@@ -1,0 +1,12 @@
+ {
+     "name": "work-timer",
+     "description": "Timer to get shit done! Productive hour split 45/15",
+     "version": "1.0",
+     "manifest_version": 3,
+     "action": {
+         "default_icon": "timer.png",
+         "default_popup": "popup.html"
+     },
+     "permissions": []
+
+ }
