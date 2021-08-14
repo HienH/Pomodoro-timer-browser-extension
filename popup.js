@@ -1,25 +1,26 @@
 
 let finished;
-start.addEventListener('click', () => {
-    startWork();
+let workingSeconds = 2400;
+document.getElementById('start').addEventListener('click', function () {
+    chrome.runtime.sendMessage({ start: true });
 });
 
-const startWork = () => {
-    // 40 mins
-    var workingSeconds = 2400;
-    var startDateSeconds = new Date().getTime() / 1000
-    var endTime = startDateSeconds - workingSeconds;
-    var timeleft = startDateSeconds - endTime
+chrome.runtime.onMessage.addListener(
+    function ({ minutes, seconds, done }) {
+        console.log(done)
+        if (done) {
+            console.log('SENDING ALEART')
+            alert("you have a message");
 
-    setInterval(() => {
-        timeleft--
-
-        var minutes = Math.floor(timeleft / 60);
-        var seconds = timeleft - minutes * 60;
-        document.getElementById('safeTimerDisplay').innerHTML = `${minutes} : ${seconds}`;
-
-        if (timeleft < 0) {
-            window.alert("Hello");
+            // window.alert("TIMER DONE");
+        } else {
+            console.log(seconds)
+            document.getElementById('safeTimerDisplay').innerHTML = `${minutes} : ${seconds}`;
         }
-    }, 1000);
-}
+    }
+);
+
+
+// TO DO LIST
+// ADD RESTART TIMER
+// ADD BREAK TIMER
